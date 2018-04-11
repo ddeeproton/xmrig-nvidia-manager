@@ -13,9 +13,9 @@ https://github.com/ddeeproton/
 
 # Description: 
 
-![](preview.png)
-
 "Xmrig Nvidia Manager" helps to avoid temperature to exceed on graphic card when using xmrig-nvidia application
+
+![](preview.png)
 
 # xmrig-nvidia.exe: 
 
