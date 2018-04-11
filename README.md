@@ -17,6 +17,14 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 ![](preview.png)
 
+# How to Build?
+
+Download Delphi 7 (for free) and build it.
+
+A free account must be created on developpez.com
+
+https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
+
 # xmrig-nvidia.exe: 
 
 ### Last version can be downloaded here:
