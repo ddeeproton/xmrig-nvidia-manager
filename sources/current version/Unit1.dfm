@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 147
   Width = 346
   Height = 330
-  Caption = 'Xmrig-Nvidia Manager v1.0.1'
+  Caption = 'Xmrig-Nvidia Manager v1.0.2'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -770,6 +770,7 @@ object Form1: TForm1
     MinValue = 0
     TabOrder = 5
     Value = 84
+    OnChange = SpinEditTemperatureLimitChange
   end
   object ButtonOpenDialog: TButton
     Left = 295

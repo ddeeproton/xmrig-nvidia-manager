@@ -42,6 +42,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure TimerStartDelayedTimer(Sender: TObject);
     procedure ButtonOpenDialogClick(Sender: TObject);
+    procedure SpinEditTemperatureLimitChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +61,7 @@ var  Setup: TIniFile;
 begin
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   EditPathXmrigNvidia.Text := Setup.ReadString('Application', 'PathXmrigNvidia', '');
+  SpinEditTemperatureLimit.Value := Setup.ReadInteger('Application', 'TemperatureLimit', 84);
   Setup.Free;
 end;
 
@@ -68,6 +70,7 @@ var  Setup: TIniFile;
 begin
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   Setup.WriteString('Application', 'PathXmrigNvidia', EditPathXmrigNvidia.Text);
+  Setup.WriteInteger('Application', 'TemperatureLimit', SpinEditTemperatureLimit.Value);
   Setup.Free;
 end;
 
@@ -301,6 +304,11 @@ begin
   OpenDialog1.InitialDir := ExtractFileDir(Application.ExeName);
   if not OpenDialog1.Execute then Exit;
   EditPathXmrigNvidia.Text := OpenDialog1.FileName;
+  SaveConfig;
+end;
+
+procedure TForm1.SpinEditTemperatureLimitChange(Sender: TObject);
+begin
   SaveConfig;
 end;
 
