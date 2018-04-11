@@ -17,7 +17,7 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 ![](preview.png)
 
-If the temperature exceeds, then mining will be stopped for 2 minutes. 
+If the temperature exceeds limit, then mining will be stopped for 2 minutes. 
 
 # How to Build?
 
