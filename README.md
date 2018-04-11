@@ -17,6 +17,8 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 ![](preview.png)
 
+If the temperature exceeds, then mining will be stopped for 2 minutes. 
+
 # How to Build?
 
 Download Delphi 7 (for free) and build it.
