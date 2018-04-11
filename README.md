@@ -5,11 +5,11 @@
 
 ### Download release:
 
-https://github.com/ddeeproton/
+https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/releases
 
 ### Download sources:
 
-https://github.com/ddeeproton/
+https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 # Description: 
 
