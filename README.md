@@ -36,3 +36,11 @@ https://github.com/xmrig/xmrig-nvidia/releases
 ### Documentation and sources can be found here:
 
 https://github.com/xmrig/xmrig-nvidia
+
+# Changes
+
+### v1.0.0 
+	First commit
+	
+### v1.0.1
+	Fix issue on restart mining
