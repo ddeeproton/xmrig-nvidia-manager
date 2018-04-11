@@ -250,7 +250,7 @@ begin
   Memo1.Lines.Add('Temperature Exceed!');
   StopDos();
   TimerStartDelayed.Interval := 2 * 60 * 1000;
-  TimerStartDelayed.Enabled := False;
+  TimerStartDelayed.Enabled := True;
 end;
 
 procedure TForm1.OnDosTemperatureAllowed(Temperature:Integer);

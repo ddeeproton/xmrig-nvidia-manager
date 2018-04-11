@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 147
   Width = 346
   Height = 330
-  Caption = 'Xmrig-Nvidia Manager v1.0.0'
+  Caption = 'Xmrig-Nvidia Manager v1.0.1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
