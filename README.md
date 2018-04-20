@@ -46,4 +46,7 @@ https://github.com/xmrig/xmrig-nvidia
 	Fix issue on restart mining
 	
 ### v1.0.2
-	Fix issue on save temperature limit
+	Fix issue on saving temperature limit
+
+### v1.0.3
+	Fix issue on stop or start button when a restarting is planned

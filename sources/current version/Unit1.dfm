@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 147
   Width = 346
   Height = 330
-  Caption = 'Xmrig-Nvidia Manager v1.0.2'
+  Caption = 'Xmrig-Nvidia Manager v1.0.3'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -723,9 +723,9 @@ object Form1: TForm1
   end
   object Memo1: TMemo
     Left = 0
-    Top = 112
+    Top = 104
     Width = 336
-    Height = 136
+    Height = 161
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       'Memo1')
@@ -733,8 +733,8 @@ object Form1: TForm1
     TabOrder = 1
   end
   object ButtonStart: TButton
-    Left = 16
-    Top = 263
+    Left = 8
+    Top = 271
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -743,8 +743,8 @@ object Form1: TForm1
     OnClick = ButtonStartClick
   end
   object ButtonStop: TButton
-    Left = 104
-    Top = 263
+    Left = 96
+    Top = 271
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -783,18 +783,18 @@ object Form1: TForm1
     OnClick = ButtonOpenDialogClick
   end
   object XPManifest1: TXPManifest
-    Left = 280
-    Top = 264
+    Left = 264
+    Top = 272
   end
   object TimerStartDelayed: TTimer
     Enabled = False
     OnTimer = TimerStartDelayedTimer
-    Left = 240
-    Top = 264
+    Left = 224
+    Top = 272
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.exe'
-    Left = 200
-    Top = 264
+    Left = 184
+    Top = 272
   end
 end

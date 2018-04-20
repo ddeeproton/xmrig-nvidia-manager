@@ -176,6 +176,11 @@ end;
 procedure TForm1.StopDos();
 begin
   CloseProcessPID(pid);
+  if TimerStartDelayed.Enabled then
+  begin
+    TimerStartDelayed.Enabled := False;
+    Memo1.Lines.Add('Cancel restart mining');
+  end;
 end;
 
 
@@ -250,7 +255,7 @@ end;
 
 procedure TForm1.OnDosTemperatureExceed(Temperature:Integer);
 begin
-  Memo1.Lines.Add('Temperature Exceed!');
+  Memo1.Lines.Add('Temperature limit exceeded! Stop mining for 2 minutes.');
   StopDos();
   TimerStartDelayed.Interval := 2 * 60 * 1000;
   TimerStartDelayed.Enabled := True;
