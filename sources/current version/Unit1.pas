@@ -176,11 +176,6 @@ end;
 procedure TForm1.StopDos();
 begin
   CloseProcessPID(pid);
-  if TimerStartDelayed.Enabled then
-  begin
-    TimerStartDelayed.Enabled := False;
-    Memo1.Lines.Add('Cancel restart mining');
-  end;
 end;
 
 
@@ -291,6 +286,11 @@ end;
 
 procedure TForm1.ButtonStartClick(Sender: TObject);
 begin
+  if TimerStartDelayed.Enabled then
+  begin
+    TimerStartDelayed.Enabled := False;
+    Memo1.Lines.Add('Cancel restart mining');
+  end;
   StopDos();
   if not FileExists(EditPathXmrigNvidia.Text) then
   begin
@@ -301,6 +301,11 @@ end;
 
 procedure TForm1.ButtonStopClick(Sender: TObject);
 begin
+  if TimerStartDelayed.Enabled then
+  begin
+    TimerStartDelayed.Enabled := False;
+    Memo1.Lines.Add('Cancel restart mining');
+  end;
   StopDos();
 end;
 

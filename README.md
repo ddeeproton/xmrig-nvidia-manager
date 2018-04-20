@@ -50,3 +50,8 @@ https://github.com/xmrig/xmrig-nvidia
 
 ### v1.0.3
 	Fix issue on stop or start button when a restarting is planned
+
+### v1.0.4
+	Fix restarting message on stop or start click 
+	
+	New design

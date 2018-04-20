@@ -1,10 +1,12 @@
 object Form1: TForm1
-  Left = 191
-  Top = 147
-  Width = 346
-  Height = 330
-  Caption = 'Xmrig-Nvidia Manager v1.0.3'
-  Color = clBtnFace
+  Left = 304
+  Top = 174
+  Width = 498
+  Height = 318
+  Caption = 'Xmrig-Nvidia Manager v1.0.4'
+  Color = clWhite
+  Constraints.MinHeight = 187
+  Constraints.MinWidth = 412
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -687,8 +689,8 @@ object Form1: TForm1
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   DesignSize = (
-    338
-    303)
+    490
+    291)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -697,6 +699,12 @@ object Form1: TForm1
     Width = 112
     Height = 13
     Caption = 'Path to xmrig-nvidia.exe'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
   end
   object Label4: TLabel
     Left = 16
@@ -704,6 +712,12 @@ object Form1: TForm1
     Width = 100
     Height = 13
     Caption = 'Current Temperature:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
   end
   object Label5: TLabel
     Left = 136
@@ -711,43 +725,63 @@ object Form1: TForm1
     Width = 83
     Height = 13
     Caption = 'Temperature limit:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
   end
   object EditPathXmrigNvidia: TEdit
     Left = 16
     Top = 24
-    Width = 272
+    Width = 424
     Height = 21
     Anchors = [akLeft, akTop, akRight]
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     Text = 'EditPathXmrigNvidia'
   end
   object Memo1: TMemo
     Left = 0
     Top = 104
-    Width = 336
-    Height = 161
+    Width = 488
+    Height = 185
     Anchors = [akLeft, akTop, akRight, akBottom]
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     Lines.Strings = (
       'Memo1')
+    ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 1
   end
   object ButtonStart: TButton
-    Left = 8
-    Top = 271
+    Left = 318
+    Top = 72
     Width = 75
     Height = 25
-    Anchors = [akLeft, akBottom]
+    Anchors = [akTop, akRight]
     Caption = 'Start'
     TabOrder = 2
     OnClick = ButtonStartClick
   end
   object ButtonStop: TButton
-    Left = 96
-    Top = 271
+    Left = 406
+    Top = 72
     Width = 75
     Height = 25
-    Anchors = [akLeft, akBottom]
+    Anchors = [akTop, akRight]
     Caption = 'Stop'
     TabOrder = 3
     OnClick = ButtonStopClick
@@ -757,6 +791,13 @@ object Form1: TForm1
     Top = 72
     Width = 97
     Height = 21
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     ReadOnly = True
     TabOrder = 4
     Text = 'EditTemperature'
@@ -766,14 +807,21 @@ object Form1: TForm1
     Top = 72
     Width = 65
     Height = 22
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     MaxValue = 0
     MinValue = 0
+    ParentFont = False
     TabOrder = 5
     Value = 84
     OnChange = SpinEditTemperatureLimitChange
   end
   object ButtonOpenDialog: TButton
-    Left = 295
+    Left = 447
     Top = 24
     Width = 33
     Height = 25
@@ -783,18 +831,18 @@ object Form1: TForm1
     OnClick = ButtonOpenDialogClick
   end
   object XPManifest1: TXPManifest
-    Left = 264
-    Top = 272
+    Left = 312
+    Top = 120
   end
   object TimerStartDelayed: TTimer
     Enabled = False
     OnTimer = TimerStartDelayedTimer
-    Left = 224
-    Top = 272
+    Left = 272
+    Top = 120
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.exe'
-    Left = 184
-    Top = 272
+    Left = 232
+    Top = 120
   end
 end
