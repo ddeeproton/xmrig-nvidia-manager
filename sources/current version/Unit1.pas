@@ -5,7 +5,7 @@ interface
 uses
   inifiles,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, XPMan, StdCtrls, ExtCtrls, Spin;
+  Dialogs, XPMan, StdCtrls, ExtCtrls, Spin, jpeg, Buttons;
 
 type
   TForm1 = class(TForm)
@@ -13,15 +13,20 @@ type
     Label1: TLabel;
     XPManifest1: TXPManifest;
     Memo1: TMemo;
-    ButtonStart: TButton;
-    ButtonStop: TButton;
     EditTemperature: TEdit;
     Label4: TLabel;
     TimerStartDelayed: TTimer;
     SpinEditTemperatureLimit: TSpinEdit;
     Label5: TLabel;
     OpenDialog1: TOpenDialog;
-    ButtonOpenDialog: TButton;
+    ImageBackground: TImage;
+    SpeedButtonStop: TSpeedButton;
+    SpeedButtonOpenDialog: TSpeedButton;
+    ImageLogo: TImage;
+    Bevel1: TBevel;
+    SpeedButtonStart: TSpeedButton;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
     procedure RunDos(Que:String);
     procedure StopDos();
     procedure OnDosOutput(line:String);
@@ -135,8 +140,6 @@ begin
     begin
       try
         pid := ProcessInfo.dwProcessId;
-
-        OnDosStart();
         new(tb);
         repeat
           CuandoSale := WaitForSingleObject( ProcessInfo.hProcess,100);
@@ -271,8 +274,19 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  Form1.DoubleBuffered := True;
+  ImageBackground.Align := alClient;
   TimerStartDelayed.Enabled := False;
   Memo1.Clear;
+  Memo1.Lines.Add('Welcome!');
+  Memo1.Lines.Add('Xmrig-Nvidia Manager is a GUI for xmrig-nvidia.exe');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('Last release, source and documentation can be found here:');
+  Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('Download and configure first xmrig-nvidia.exe here:');
+  Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+  Memo1.Lines.Add('');
   EditPathXmrigNvidia.Clear;
   EditTemperature.Text := '?';                                          
   LoadConfig;
@@ -292,9 +306,12 @@ begin
     Memo1.Lines.Add('Cancel restart mining');
   end;
   StopDos();
+  OnDosStart();  
   if not FileExists(EditPathXmrigNvidia.Text) then
   begin
     Memo1.Lines.Add('Error: Path to xmrig-nvidia.exe is not valid!');
+    Memo1.Lines.Add('Download and configure xmrig-nvidia.exe here:');
+    Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
   end;
   RunDos(EditPathXmrigNvidia.Text);
 end;

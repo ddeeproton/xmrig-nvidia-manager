@@ -55,3 +55,8 @@ https://github.com/xmrig/xmrig-nvidia
 	Fix restarting message on stop or start click 
 	
 	New design
+	
+### v1.0.5
+	Add messages to help customers
+
+	New design
