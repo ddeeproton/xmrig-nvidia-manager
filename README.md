@@ -19,9 +19,15 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 If the temperature exceeds limit, then mining will be stopped for 2 minutes. 
 
-# How to Build?
+# How to Build? (from v1.0.6 until the most recent)
 
-Download Delphi 7 (for free) and build it.
+Download Lazarus for Windows and build it. 
+
+http://www.lazarus-ide.org/index.php?page=downloads
+
+# How to Build? (for old version from v1.0.0 until v1.0.5)
+
+Download Delphi 7 for Windows and build it.
 
 A free account must be created on developpez.com
 
@@ -60,3 +66,8 @@ https://github.com/xmrig/xmrig-nvidia
 	Add messages to help customers
 
 	New design
+	
+### v1.0.6
+	The project is compiled with Lazarus
+	
+	Add Checkbox "No Donation" (if mining is not profitable enough)
