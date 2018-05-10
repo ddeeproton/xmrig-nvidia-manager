@@ -7,7 +7,7 @@ interface
 uses
   inifiles, Windows,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ExtCtrls, Spin;
+  Buttons, ExtCtrls, Spin, Menus;
 
 type
 
@@ -27,13 +27,21 @@ type
     Label3: TLabel;
     LabelDonation: TLabel;
     Memo1: TMemo;
+    MenuItemShow: TMenuItem;
+    MenuItemHide: TMenuItem;
+    MenuItemExit: TMenuItem;
     OpenDialog1: TOpenDialog;
+    PopupMenu1: TPopupMenu;
     SpeedButtonOpenDialog: TSpeedButton;
     SpeedButtonStart: TSpeedButton;
     SpeedButtonStop: TSpeedButton;
     SpinEditTemperatureLimit: TSpinEdit;
     TimerStartDelayed: TTimer;
+    TrayIcon1: TTrayIcon;
     procedure LabelDonationClick(Sender: TObject);
+    procedure MenuItemExitClick(Sender: TObject);
+    procedure MenuItemHideClick(Sender: TObject);
+    procedure MenuItemShowClick(Sender: TObject);
     procedure RunDos(Que:String);
     procedure StopDos();
     procedure OnDosOutput(line:String);
@@ -181,6 +189,21 @@ begin
   SaveConfig();
 end;
 
+procedure TForm1.MenuItemExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TForm1.MenuItemHideClick(Sender: TObject);
+begin
+  Hide;
+end;
+
+procedure TForm1.MenuItemShowClick(Sender: TObject);
+begin
+  Show;
+end;
+
 
 procedure TForm1.CloseProcessPID(pid: Integer);
 var
@@ -223,6 +246,7 @@ procedure TForm1.OnDosOutput(line:String);
 begin
   Memo1.Lines.Add(RemoveNewlineAtEnd(line));
   TrackDosTemperatureOutput(line);
+  TrackDonation(line);
 end;
 
 function TForm1.RemoveNewlineAtEnd(line: String): String;
