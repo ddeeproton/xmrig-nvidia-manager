@@ -4,7 +4,7 @@ object Form1: TForm1
   Top = 151
   Width = 380
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig-Nvidia Manager v1.0.8'
+  Caption = 'Xmrig-Nvidia Manager v1.0.9'
   ClientHeight = 224
   ClientWidth = 380
   Color = clBlack
@@ -1247,20 +1247,6 @@ object Form1: TForm1
     }
     Stretch = True
   end
-  object Bevel3: TBevel
-    Left = 229
-    Height = 21
-    Top = 90
-    Width = 61
-    Anchors = [akTop, akRight]
-  end
-  object Bevel1: TBevel
-    Left = 324
-    Height = 21
-    Top = 19
-    Width = 37
-    Anchors = [akTop, akRight]
-  end
   object EditPathXmrigNvidia: TEdit
     Left = 48
     Height = 21
@@ -1272,13 +1258,12 @@ object Form1: TForm1
     Text = 'EditPathXmrigNvidia'
   end
   object SpeedButtonOpenDialog: TSpeedButton
-    Left = 323
+    Left = 325
     Height = 21
     Top = 19
     Width = 37
     Anchors = [akTop, akRight]
     Caption = '...'
-    Flat = True
     OnClick = ButtonOpenDialogClick
   end
   object Label1: TLabel
@@ -1342,28 +1327,19 @@ object Form1: TForm1
   object SpeedButtonStart: TSpeedButton
     Left = 229
     Height = 21
-    Top = 90
+    Top = 94
     Width = 61
     Anchors = [akTop, akRight]
     Caption = 'Start'
-    Flat = True
     OnClick = ButtonStartClick
-  end
-  object Bevel2: TBevel
-    Left = 301
-    Height = 21
-    Top = 90
-    Width = 61
-    Anchors = [akTop, akRight]
   end
   object SpeedButtonStop: TSpeedButton
     Left = 301
     Height = 21
-    Top = 90
+    Top = 94
     Width = 61
     Anchors = [akTop, akRight]
     Caption = 'Stop'
-    Flat = True
     OnClick = ButtonStopClick
   end
   object ImageLogo: TImage

@@ -14,9 +14,6 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
-    Bevel1: TBevel;
-    Bevel2: TBevel;
-    Bevel3: TBevel;
     CheckBoxNoDonation: TCheckBox;
     EditPathXmrigNvidia: TEdit;
     EditTemperature: TEdit;
@@ -356,7 +353,7 @@ begin
 
   for i := 1 to ParamCount() do
   begin
-    if LowerCase(ParamStr(i)).EndsWith('start') then
+    if LowerCase(ParamStr(i)).Contains('start') then
     begin
       ButtonStartClick(nil);
       Exit;

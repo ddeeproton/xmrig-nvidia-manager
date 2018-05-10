@@ -80,4 +80,9 @@ https://github.com/xmrig/xmrig-nvidia
 ### v1.0.8
 	Add autostart mining with application
 	
+### v1.0.9
+	Fix issue on design
+	
+	Fix issue on autostart
+	
 	
