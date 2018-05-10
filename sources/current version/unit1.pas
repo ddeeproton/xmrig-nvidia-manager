@@ -331,6 +331,7 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var i: Integer;
 begin
   Form1.DoubleBuffered := True;
   ImageBackground.Align := alClient;
@@ -345,10 +346,29 @@ begin
   Memo1.Lines.Add('Download and configure first xmrig-nvidia.exe here:');
   Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
   Memo1.Lines.Add('');
+  Memo1.Lines.Add('To start mining with application launch:');
+  Memo1.Lines.Add(ExtractFileNameOnly(Application.ExeName) + '.exe /start');
+
   EditPathXmrigNvidia.Clear;
   EditTemperature.Text := '?';
   LoadConfig;
   //TrackDosTemperatureOutput('[2000-01-01 00:00:00]  * GPU #0: 85C FAN 50%');
+
+  for i := 1 to ParamCount() do
+  begin
+    if LowerCase(ParamStr(i)).EndsWith('start') then
+    begin
+      ButtonStartClick(nil);
+      Exit;
+    end;
+    if LowerCase(ParamStr(i)).Contains('help') then
+    begin
+      ShowMessage('To start mining with application launch:'+#13#13+ ExtractFileNameOnly(Application.ExeName) + '.exe start');
+      Application.Terminate;
+      Exit;
+    end;
+  end;
+
 end;
 
 procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);

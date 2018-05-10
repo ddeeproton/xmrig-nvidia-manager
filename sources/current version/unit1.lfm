@@ -4,7 +4,7 @@ object Form1: TForm1
   Top = 151
   Width = 380
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig-Nvidia Manager v1.0.7'
+  Caption = 'Xmrig-Nvidia Manager v1.0.8'
   ClientHeight = 224
   ClientWidth = 380
   Color = clBlack
@@ -2081,6 +2081,7 @@ object Form1: TForm1
     Width = 67
     AutoSize = False
     Caption = 'No donation'
+    FocusControl = CheckBoxNoDonation
     Font.Color = clWhite
     Font.Style = [fsBold]
     ParentColor = False
