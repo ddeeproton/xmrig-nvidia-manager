@@ -71,3 +71,8 @@ https://github.com/xmrig/xmrig-nvidia
 	The project is compiled with Lazarus
 	
 	Add Checkbox "No Donation" (if mining is not profitable enough)
+
+### v1.0.7
+	Fix issue on "no donation"
+	
+	Add Systray icon
