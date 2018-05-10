@@ -335,16 +335,19 @@ begin
   TimerStartDelayed.Enabled := False;
   Memo1.Clear;
   Memo1.Lines.Add('Welcome!');
-  Memo1.Lines.Add('Xmrig-Nvidia Manager is a GUI for xmrig-nvidia.exe');
+  Memo1.Lines.Add('Xmrig Manager is a GUI for xmrig.exe and xmrig-nvidia.exe');
   Memo1.Lines.Add('');
   Memo1.Lines.Add('Last release, source and documentation can be found here:');
   Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('Download and configure first xmrig-nvidia.exe here:');
+  Memo1.Lines.Add('Download and configure first xmrig or xmrig-nvidia.');
+  Memo1.Lines.Add('xmrig-nvidia:');
   Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+  Memo1.Lines.Add('xmrig:');
+  Memo1.Lines.Add('https://github.com/xmrig/xmrig/releases');
   Memo1.Lines.Add('');
   Memo1.Lines.Add('To start mining with application launch:');
-  Memo1.Lines.Add(ExtractFileNameOnly(Application.ExeName) + '.exe /start');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /start');
 
   EditPathXmrigNvidia.Clear;
   EditTemperature.Text := '?';
@@ -360,7 +363,7 @@ begin
     end;
     if LowerCase(ParamStr(i)).Contains('help') then
     begin
-      ShowMessage('To start mining with application launch:'+#13#13+ ExtractFileNameOnly(Application.ExeName) + '.exe start');
+      ShowMessage('To start mining with application launch:'+#13#13+ ExtractFileName(Application.ExeName) + '.exe start');
       Application.Terminate;
       Exit;
     end;

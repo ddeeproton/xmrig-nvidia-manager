@@ -4,7 +4,7 @@ object Form1: TForm1
   Top = 151
   Width = 380
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig-Nvidia Manager v1.0.9'
+  Caption = 'Xmrig Manager v1.0.10'
   ClientHeight = 224
   ClientWidth = 380
   Color = clBlack
@@ -687,7 +687,7 @@ object Form1: TForm1
   }
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.6.4.0'
+  LCLVersion = '1.8.2.0'
   object ImageBackground: TImage
     Left = 8
     Height = 29
@@ -1249,7 +1249,7 @@ object Form1: TForm1
   end
   object EditPathXmrigNvidia: TEdit
     Left = 48
-    Height = 21
+    Height = 23
     Top = 19
     Width = 260
     Anchors = [akTop, akLeft, akRight]
@@ -1265,13 +1265,14 @@ object Form1: TForm1
     Anchors = [akTop, akRight]
     Caption = '...'
     OnClick = ButtonOpenDialogClick
+    ParentFont = False
   end
   object Label1: TLabel
     Left = 49
-    Height = 13
+    Height = 15
     Top = 3
-    Width = 140
-    Caption = 'Path to xmrig-nvidia.exe'
+    Width = 216
+    Caption = 'Path to xmrig-nvidia.exe or  xmrig.exe'
     Font.Color = clWhite
     Font.Style = [fsBold]
     ParentColor = False
@@ -1279,7 +1280,7 @@ object Form1: TForm1
   end
   object EditTemperature: TEdit
     Left = 48
-    Height = 21
+    Height = 23
     Hint = 'Current GPU Temperature (in °C)'
     Top = 64
     Width = 81
@@ -1292,9 +1293,9 @@ object Form1: TForm1
   end
   object Label2: TLabel
     Left = 49
-    Height = 13
+    Height = 15
     Top = 48
-    Width = 78
+    Width = 77
     Caption = 'Temperature:'
     Font.Color = clWhite
     Font.Style = [fsBold]
@@ -1303,7 +1304,7 @@ object Form1: TForm1
   end
   object Label3: TLabel
     Left = 144
-    Height = 13
+    Height = 15
     Top = 48
     Width = 31
     Caption = 'Limit:'
@@ -1314,7 +1315,7 @@ object Form1: TForm1
   end
   object SpinEditTemperatureLimit: TSpinEdit
     Left = 144
-    Height = 21
+    Height = 23
     Hint = 'Maximum GPU Temperature (in °C)'
     Top = 64
     Width = 50
@@ -1332,6 +1333,7 @@ object Form1: TForm1
     Anchors = [akTop, akRight]
     Caption = 'Start'
     OnClick = ButtonStartClick
+    ParentFont = False
   end
   object SpeedButtonStop: TSpeedButton
     Left = 301
@@ -1341,6 +1343,7 @@ object Form1: TForm1
     Anchors = [akTop, akRight]
     Caption = 'Stop'
     OnClick = ButtonStopClick
+    ParentFont = False
   end
   object ImageLogo: TImage
     Left = 8
@@ -2050,10 +2053,10 @@ object Form1: TForm1
     TabOrder = 4
   end
   object LabelDonation: TLabel
-    Left = 72
+    Left = 67
     Height = 13
     Hint = 'If donation is detected, then restart mining'
-    Top = 98
+    Top = 95
     Width = 67
     AutoSize = False
     Caption = 'No donation'
