@@ -1248,7 +1248,7 @@ object Form1: TForm1
     Stretch = True
   end
   object Bevel3: TBevel
-    Left = 227
+    Left = 229
     Height = 21
     Top = 90
     Width = 61
