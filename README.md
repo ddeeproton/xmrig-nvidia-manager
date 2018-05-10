@@ -76,3 +76,8 @@ https://github.com/xmrig/xmrig-nvidia
 	Fix issue on "no donation"
 	
 	Add Systray icon
+
+### v1.0.8
+	Add autostart mining with application
+	
+	
