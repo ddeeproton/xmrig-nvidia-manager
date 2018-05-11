@@ -107,4 +107,4 @@ https://github.com/xmrig/xmrig
 	Fix issue Win32
 	
 ### v1.0.11
-	Add more autostart options
+	Add more options
