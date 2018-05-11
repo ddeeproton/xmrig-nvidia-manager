@@ -43,7 +43,7 @@ https://github.com/xmrig/xmrig-nvidia/releases
 
 https://github.com/xmrig/xmrig-nvidia
 
-# xmrig-nvidia.exe (CPU Mining): 
+# xmrig.exe (CPU Mining): 
 
 ### Last version can be downloaded here:
 
