@@ -13,11 +13,13 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 # Description: 
 
-"Xmrig Nvidia Manager" helps to avoid temperature to exceed on graphic card when using xmrig-nvidia application
+"Xmrig Manager" helps to avoid temperature to exceed on graphic card when using xmrig-nvidia application and remove donation for xmrig and xmrig-nvidia. 
 
 ![](preview.png)
 
 If the temperature exceeds limit, then mining will be stopped for 2 minutes. 
+
+If donation detected, then mining will be restarted. 
 
 # How to Build? (from v1.0.6 until the most recent)
 
