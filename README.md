@@ -37,9 +37,7 @@ A free account must be created on developpez.com
 
 https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 
-# xmrig-nvidia.exe (GPU Mining): 
-
-### Last version can be downloaded here:
+# Download xmrig-nvidia.exe (GPU Mining): 
 
 https://github.com/xmrig/xmrig-nvidia/releases
 
@@ -47,9 +45,7 @@ https://github.com/xmrig/xmrig-nvidia/releases
 
 https://github.com/xmrig/xmrig-nvidia
 
-# xmrig.exe (CPU Mining): 
-
-### Last version can be downloaded here:
+# Download xmrig.exe (CPU Mining): 
 
 https://github.com/xmrig/xmrig/releases
 
