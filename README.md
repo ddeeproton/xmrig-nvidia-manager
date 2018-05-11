@@ -23,20 +23,6 @@ If donation detected, then mining will be restarted.
 
 Actually, this Manager is compatible with only one graphic card. If you mine with two or more graphic card, you have to use one "XMRIG Manager"'s instance per graphic card (and stored in a different directory). 
 
-# How to Build? (from v1.0.6 until the most recent)
-
-Download Lazarus for Windows and build it. 
-
-http://www.lazarus-ide.org/index.php?page=downloads
-
-# How to Build? (for old version from v1.0.0 until v1.0.5)
-
-Download Delphi 7 for Windows and build it.
-
-A free account must be created on developpez.com
-
-https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
-
 # How to use?
 
 1. Download and configure xmrig or xmrig-nvidia.
@@ -60,6 +46,22 @@ https://github.com/xmrig/xmrig/releases
 ### Documentation and sources can be found here:
 
 https://github.com/xmrig/xmrig
+
+# How to Build? 
+
+### from v1.0.6 until the most recent:
+
+Download Lazarus for Windows and build it. 
+
+http://www.lazarus-ide.org/index.php?page=downloads
+
+### for old version from v1.0.0 until v1.0.5)
+
+Download Delphi 7 for Windows and build it.
+
+A free account must be created on developpez.com
+
+https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 
 # Changes
 
