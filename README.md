@@ -59,7 +59,7 @@ http://www.lazarus-ide.org/index.php?page=downloads
 
 Download Delphi 7 for Windows and build it.
 
-A free account must be created on developpez.com
+A free account must be created on developpez.com (French website)
 
 https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 
