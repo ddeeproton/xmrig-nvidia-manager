@@ -49,13 +49,13 @@ https://github.com/xmrig/xmrig
 
 # How to Build? 
 
-### from v1.0.6 until the most recent:
+### From v1.0.6 until the most recent:
 
 Download Lazarus for Windows and build it. 
 
 http://www.lazarus-ide.org/index.php?page=downloads
 
-### for old version from v1.0.0 until v1.0.5:
+### From oldest version until v1.0.5:
 
 Download Delphi 7 for Windows and build it.
 
