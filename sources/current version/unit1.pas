@@ -5,16 +5,16 @@ unit Unit1;
 interface
 
 uses
-  inifiles, Windows,
+  inifiles, Windows, Registry, MD5,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ExtCtrls, Spin, Menus;
+  Buttons, ExtCtrls, Spin, Menus, CheckLst;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
-    CheckBoxNoDonation: TCheckBox;
+    CheckListBoxOptions: TCheckListBox;
     EditPathXmrigNvidia: TEdit;
     EditTemperature: TEdit;
     ImageLogo: TImage;
@@ -22,7 +22,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    LabelDonation: TLabel;
     Memo1: TMemo;
     MenuItemShow: TMenuItem;
     MenuItemHide: TMenuItem;
@@ -32,10 +31,11 @@ type
     SpeedButtonOpenDialog: TSpeedButton;
     SpeedButtonStart: TSpeedButton;
     SpeedButtonStop: TSpeedButton;
+    SpeedButtonStop1: TSpeedButton;
     SpinEditTemperatureLimit: TSpinEdit;
     TimerStartDelayed: TTimer;
     TrayIcon1: TTrayIcon;
-    procedure LabelDonationClick(Sender: TObject);
+    procedure CheckGroupOptionsItemClick(Sender: TObject; Index: integer);
     procedure MenuItemExitClick(Sender: TObject);
     procedure MenuItemHideClick(Sender: TObject);
     procedure MenuItemShowClick(Sender: TObject);
@@ -71,6 +71,12 @@ var
   Form1: TForm1;
   pid: Integer;
 
+const
+  I_NODONATION : Integer = 0;
+  I_AUTOSTART: Integer = 1;
+  I_BOOTWINDOWS: Integer = 2;
+  I_BACKGROUNDSTART: Integer = 3;
+
 implementation
 
 {$R *.lfm}
@@ -81,24 +87,120 @@ implementation
 { TForm1 }
 
 
-procedure TForm1.LoadConfig();
-var  Setup: TIniFile;
+procedure TForm1.FormCreate(Sender: TObject);
+var i: Integer;
 begin
+  Form1.DoubleBuffered := True;
+  ImageBackground.Align := alClient;
+  TimerStartDelayed.Enabled := False;
+  Memo1.Clear;
+  Memo1.Lines.Add('Welcome!');
+  Memo1.Lines.Add('Xmrig Manager is a GUI for xmrig.exe and xmrig-nvidia.exe');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('Last release, source and documentation can be found here:');
+  Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('Download and configure first xmrig or xmrig-nvidia.');
+  Memo1.Lines.Add('xmrig-nvidia:');
+  Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+  Memo1.Lines.Add('xmrig:');
+  Memo1.Lines.Add('https://github.com/xmrig/xmrig/releases');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('To start mining with application:');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('To start in background:');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /background');
+  Memo1.Lines.Add('');
+  Memo1.Lines.Add('Commands can be combined:');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart /background');
+
+  EditPathXmrigNvidia.Clear;
+  EditTemperature.Text := '?';
+  LoadConfig;
+
+  if CheckListBoxOptions.Checked[I_AUTOSTART] then
+    ButtonStartClick(nil);
+
+  if CheckListBoxOptions.Checked[I_BACKGROUNDSTART] then
+    MenuItemHideClick(nil);
+
+  //TrackDosTemperatureOutput('[2000-01-01 00:00:00]  * GPU #0: 85C FAN 50%');
+
+  for i := 1 to ParamCount() do
+  begin
+    if LowerCase(ParamStr(i)).Contains('background')
+    and not CheckListBoxOptions.Checked[I_BACKGROUNDSTART] then
+    begin
+      MenuItemHideClick(nil);
+    end;
+    if LowerCase(ParamStr(i)).Contains('autostart')
+    and not CheckListBoxOptions.Checked[I_AUTOSTART] then
+    begin
+      ButtonStartClick(nil);
+    end;
+  end;
+
+end;
+
+
+procedure TForm1.LoadConfig();
+var
+  Setup: TIniFile;
+  Reg: TRegistry;
+begin
+  // Check load on boot
+  Reg := TRegistry.Create;
+  Reg.RootKey := HKEY_CURRENT_USER;
+  if Reg.OpenKey('\Software\Microsoft\Windows\CurrentVersion\Run', True) then
+  begin
+    CheckListBoxOptions.Checked[I_BOOTWINDOWS] := Reg.ValueExists(ExtractFileName(Application.ExeName)+'_'+MD5Print(MD5String(ExtractFileDir(Application.ExeName))));
+    Reg.CloseKey;
+  end;
+  Reg.Free;
+
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   EditPathXmrigNvidia.Text := Setup.ReadString('Application', 'PathXmrigNvidia', '');
   SpinEditTemperatureLimit.Value := Setup.ReadInteger('Application', 'TemperatureLimit', 84);
-  CheckBoxNoDonation.Checked := Setup.ReadBool('Application', 'NoDonation', False);
+  CheckListBoxOptions.Checked[I_NODONATION] := Setup.ReadBool('Application', 'NoDonation', False);
+  CheckListBoxOptions.Checked[I_AUTOSTART] := Setup.ReadBool('Application', 'AutoStart', False);
+  //CheckGroupOptions.Checked[I_BOOTWINDOWS] := Setup.ReadBool('Application', 'BootWindows', False);
+  CheckListBoxOptions.Checked[I_BACKGROUNDSTART] := Setup.ReadBool('Application', 'BackgroundStart', False);
   Setup.Free;
+
+
 end;
 
 procedure TForm1.SaveConfig();
-var  Setup: TIniFile;
+var
+  Setup: TIniFile;
+  Reg: TRegistry;
 begin
+  Reg := TRegistry.Create;
+  Reg.RootKey := HKEY_CURRENT_USER;
+  try
+  if Reg.OpenKey('\Software\Microsoft\Windows\CurrentVersion\Run', True) then
+  begin
+    if CheckListBoxOptions.Checked[I_BOOTWINDOWS] then
+      Reg.WriteString(ExtractFileName(Application.ExeName)+'_'+MD5Print(MD5String(ExtractFileDir(Application.ExeName))), '"'+Application.ExeName+'"')
+    else
+      Reg.DeleteValue(ExtractFileName(Application.ExeName)+'_'+MD5Print(MD5String(ExtractFileDir(Application.ExeName))));
+    Reg.CloseKey;
+  end;
+  finally
+    Reg.Free;
+  end;
+
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   Setup.WriteString('Application', 'PathXmrigNvidia', EditPathXmrigNvidia.Text);
   Setup.WriteInteger('Application', 'TemperatureLimit', SpinEditTemperatureLimit.Value);
-  Setup.WriteBool('Application', 'NoDonation', CheckBoxNoDonation.Checked);
+  Setup.WriteBool('Application', 'NoDonation', CheckListBoxOptions.Checked[I_NODONATION]);
+  Setup.WriteBool('Application', 'AutoStart', CheckListBoxOptions.Checked[I_AUTOSTART]);
+  //Setup.WriteBool('Application', 'BootWindows', CheckListBoxOptions.Checked[I_BOOTWINDOWS]);
+  Setup.WriteBool('Application', 'BackgroundStart', CheckListBoxOptions.Checked[I_BACKGROUNDSTART]);
   Setup.Free;
+
+
 end;
 
 procedure TForm1.RunDos(Que:String);
@@ -180,11 +282,6 @@ begin
 
 end;
 
-procedure TForm1.LabelDonationClick(Sender: TObject);
-begin
-  CheckBoxNoDonation.Checked := not CheckBoxNoDonation.Checked;
-  SaveConfig();
-end;
 
 procedure TForm1.MenuItemExitClick(Sender: TObject);
 begin
@@ -193,11 +290,13 @@ end;
 
 procedure TForm1.MenuItemHideClick(Sender: TObject);
 begin
+  Application.ShowMainForm := False;
   Hide;
 end;
 
 procedure TForm1.MenuItemShowClick(Sender: TObject);
 begin
+  Application.ShowMainForm := True;
   Show;
 end;
 
@@ -291,7 +390,7 @@ end;
 
 procedure TForm1.TrackDonation(line:String);
 begin
-  if not CheckBoxNoDonation.Checked then Exit;
+  if not CheckListBoxOptions.Checked[I_NODONATION] then Exit;
   if Pos('dev donate started', line) = 0 then Exit;
   Memo1.Lines.Add('Stop donation (restart)');
   ButtonStartClick(nil);
@@ -325,50 +424,6 @@ procedure TForm1.TimerStartDelayedTimer(Sender: TObject);
 begin
   TTimer(Sender).Enabled := False;
   ButtonStartClick(nil);
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-var i: Integer;
-begin
-  Form1.DoubleBuffered := True;
-  ImageBackground.Align := alClient;
-  TimerStartDelayed.Enabled := False;
-  Memo1.Clear;
-  Memo1.Lines.Add('Welcome!');
-  Memo1.Lines.Add('Xmrig Manager is a GUI for xmrig.exe and xmrig-nvidia.exe');
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('Last release, source and documentation can be found here:');
-  Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('Download and configure first xmrig or xmrig-nvidia.');
-  Memo1.Lines.Add('xmrig-nvidia:');
-  Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
-  Memo1.Lines.Add('xmrig:');
-  Memo1.Lines.Add('https://github.com/xmrig/xmrig/releases');
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('To start mining with application launch:');
-  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /start');
-
-  EditPathXmrigNvidia.Clear;
-  EditTemperature.Text := '?';
-  LoadConfig;
-  //TrackDosTemperatureOutput('[2000-01-01 00:00:00]  * GPU #0: 85C FAN 50%');
-
-  for i := 1 to ParamCount() do
-  begin
-    if LowerCase(ParamStr(i)).Contains('start') then
-    begin
-      ButtonStartClick(nil);
-      Exit;
-    end;
-    if LowerCase(ParamStr(i)).Contains('help') then
-    begin
-      ShowMessage('To start mining with application launch:'+#13#13+ ExtractFileName(Application.ExeName) + '.exe start');
-      Application.Terminate;
-      Exit;
-    end;
-  end;
-
 end;
 
 procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -413,6 +468,11 @@ begin
 end;
 
 procedure TForm1.SpinEditTemperatureLimitChange(Sender: TObject);
+begin
+  SaveConfig;
+end;
+
+procedure TForm1.CheckGroupOptionsItemClick(Sender: TObject; Index: integer);
 begin
   SaveConfig;
 end;

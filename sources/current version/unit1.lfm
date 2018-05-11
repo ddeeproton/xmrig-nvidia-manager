@@ -1,15 +1,15 @@
 object Form1: TForm1
-  Left = 241
+  Left = 237
   Height = 224
-  Top = 151
-  Width = 380
+  Top = 147
+  Width = 491
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig Manager v1.0.10'
+  Caption = 'Xmrig Manager v1.0.11'
   ClientHeight = 224
-  ClientWidth = 380
+  ClientWidth = 491
   Color = clBlack
   Constraints.MinHeight = 150
-  Constraints.MinWidth = 380
+  Constraints.MinWidth = 491
   Font.Color = clWhite
   Icon.Data = {
     F95300000000010004000000000001002000FB18000046000000303000000100
@@ -1248,19 +1248,19 @@ object Form1: TForm1
     Stretch = True
   end
   object EditPathXmrigNvidia: TEdit
-    Left = 48
-    Height = 23
-    Top = 19
-    Width = 260
+    Left = 200
+    Height = 21
+    Top = 24
+    Width = 168
     Anchors = [akTop, akLeft, akRight]
     Color = clBlack
     TabOrder = 0
     Text = 'EditPathXmrigNvidia'
   end
   object SpeedButtonOpenDialog: TSpeedButton
-    Left = 325
+    Left = 373
     Height = 21
-    Top = 19
+    Top = 24
     Width = 37
     Anchors = [akTop, akRight]
     Caption = '...'
@@ -1268,10 +1268,10 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 49
-    Height = 15
-    Top = 3
-    Width = 216
+    Left = 200
+    Height = 13
+    Top = 8
+    Width = 218
     Caption = 'Path to xmrig-nvidia.exe or  xmrig.exe'
     Font.Color = clWhite
     Font.Style = [fsBold]
@@ -1279,10 +1279,10 @@ object Form1: TForm1
     ParentFont = False
   end
   object EditTemperature: TEdit
-    Left = 48
-    Height = 23
+    Left = 200
+    Height = 21
     Hint = 'Current GPU Temperature (in °C)'
-    Top = 64
+    Top = 63
     Width = 81
     Color = clBlack
     ParentShowHint = False
@@ -1292,10 +1292,10 @@ object Form1: TForm1
     Text = 'EditTemperature'
   end
   object Label2: TLabel
-    Left = 49
-    Height = 15
-    Top = 48
-    Width = 77
+    Left = 201
+    Height = 13
+    Top = 47
+    Width = 78
     Caption = 'Temperature:'
     Font.Color = clWhite
     Font.Style = [fsBold]
@@ -1303,9 +1303,9 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 144
-    Height = 15
-    Top = 48
+    Left = 296
+    Height = 13
+    Top = 47
     Width = 31
     Caption = 'Limit:'
     Font.Color = clWhite
@@ -1314,10 +1314,10 @@ object Form1: TForm1
     ParentFont = False
   end
   object SpinEditTemperatureLimit: TSpinEdit
-    Left = 144
-    Height = 23
+    Left = 296
+    Height = 21
     Hint = 'Maximum GPU Temperature (in °C)'
-    Top = 64
+    Top = 63
     Width = 50
     Color = clBlack
     OnChange = SpinEditTemperatureLimitChange
@@ -1326,20 +1326,20 @@ object Form1: TForm1
     TabOrder = 2
   end
   object SpeedButtonStart: TSpeedButton
-    Left = 229
+    Left = 359
     Height = 21
-    Top = 94
-    Width = 61
+    Top = 63
+    Width = 53
     Anchors = [akTop, akRight]
     Caption = 'Start'
     OnClick = ButtonStartClick
     ParentFont = False
   end
   object SpeedButtonStop: TSpeedButton
-    Left = 301
+    Left = 423
     Height = 21
-    Top = 94
-    Width = 61
+    Top = 63
+    Width = 53
     Anchors = [akTop, akRight]
     Caption = 'Stop'
     OnClick = ButtonStopClick
@@ -2027,10 +2027,10 @@ object Form1: TForm1
     }
   end
   object Memo1: TMemo
-    Left = 0
-    Height = 106
-    Top = 120
-    Width = 379
+    Left = 1
+    Height = 130
+    Top = 96
+    Width = 490
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clBlack
     Lines.Strings = (
@@ -2039,44 +2039,43 @@ object Form1: TForm1
     ScrollBars = ssAutoBoth
     TabOrder = 3
   end
-  object CheckBoxNoDonation: TCheckBox
-    Left = 49
-    Height = 17
-    Hint = 'If donation is detected, then restart mining'
-    Top = 94
-    Width = 13
-    AutoSize = False
+  object CheckListBoxOptions: TCheckListBox
+    Left = 48
+    Height = 79
+    Top = 8
+    Width = 137
     Color = clBlack
-    ParentColor = False
-    ParentShowHint = False
-    ShowHint = True
+    Items.Strings = (
+      'No donation'
+      'AutoStart Mining'
+      'Start on OS Boot'
+      'Start in Background '
+    )
+    ItemHeight = 17
+    OnItemClick = CheckGroupOptionsItemClick
     TabOrder = 4
+    Data = {
+      0400000000000000
+    }
   end
-  object LabelDonation: TLabel
-    Left = 67
-    Height = 13
-    Hint = 'If donation is detected, then restart mining'
-    Top = 95
-    Width = 67
-    AutoSize = False
-    Caption = 'No donation'
-    FocusControl = CheckBoxNoDonation
-    Font.Color = clWhite
-    Font.Style = [fsBold]
-    ParentColor = False
+  object SpeedButtonStop1: TSpeedButton
+    Left = 423
+    Height = 21
+    Top = 24
+    Width = 53
+    Anchors = [akTop, akRight]
+    Caption = 'Hide'
+    OnClick = MenuItemHideClick
     ParentFont = False
-    ParentShowHint = False
-    ShowHint = True
-    OnClick = LabelDonationClick
   end
   object TimerStartDelayed: TTimer
     Enabled = False
-    left = 296
-    top = 128
+    left = 304
+    top = 152
   end
   object OpenDialog1: TOpenDialog
-    left = 256
-    top = 128
+    left = 272
+    top = 152
   end
   object TrayIcon1: TTrayIcon
     PopUpMenu = PopupMenu1
@@ -2756,12 +2755,12 @@ object Form1: TForm1
     }
     Visible = True
     OnClick = MenuItemShowClick
-    left = 216
-    top = 128
+    left = 240
+    top = 152
   end
   object PopupMenu1: TPopupMenu
-    left = 178
-    top = 128
+    left = 208
+    top = 152
     object MenuItemShow: TMenuItem
       Caption = 'Show'
       OnClick = MenuItemShowClick

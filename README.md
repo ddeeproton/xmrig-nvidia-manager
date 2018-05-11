@@ -87,3 +87,6 @@ https://github.com/xmrig/xmrig-nvidia
 	
 ### v1.0.10
 	Fix issue Win32
+	
+### v1.0.11
+	Add more autostart options
