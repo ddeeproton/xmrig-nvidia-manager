@@ -55,7 +55,7 @@ Download Lazarus for Windows and build it.
 
 http://www.lazarus-ide.org/index.php?page=downloads
 
-### for old version from v1.0.0 until v1.0.5)
+### for old version from v1.0.0 until v1.0.5:
 
 Download Delphi 7 for Windows and build it.
 
