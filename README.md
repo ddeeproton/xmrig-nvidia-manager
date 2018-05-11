@@ -37,6 +37,14 @@ A free account must be created on developpez.com
 
 https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 
+# How to use?
+
+1. Download and configure xmrig or xmrig-nvidia.
+
+2. Set the path of xmrig or xmrig-nvidia into "XMRIG Manager".
+
+3. Press button Start in "XMRIG Manager".
+
 # Download xmrig-nvidia.exe (GPU Mining): 
 
 https://github.com/xmrig/xmrig-nvidia/releases
