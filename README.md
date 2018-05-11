@@ -21,7 +21,7 @@ If the temperature exceeds limit, then mining will be stopped for 2 minutes.
 
 If "No donation" checked, then mining will be restarted on donation start. 
 
-Actually, this Manager is compatible with only one graphic card. If you mine with two or more graphic card, you have to use one "XMRIG Manager"'s instance per graphic card (and stored in a different directory). 
+Actually, this Manager is compatible with one graphic card only. If you mine with two or more graphic card, you have to use one "XMRIG Manager"'s instance per graphic card (and stored in a different directory). 
 
 # How to use?
 
