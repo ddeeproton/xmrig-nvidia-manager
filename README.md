@@ -110,3 +110,6 @@ https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 	
 ### v1.0.11
 	Add more options
+	
+### v1.0.12
+	Fix issue on restart

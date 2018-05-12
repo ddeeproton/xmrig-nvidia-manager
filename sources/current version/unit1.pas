@@ -327,14 +327,11 @@ end;
 procedure TForm1.OnDosStart();
 begin
   Memo1.Lines.Add('Start mining');
-  SaveConfig;
 end;
 
 procedure TForm1.OnDosStop();
 begin
-  StopDos();
   Memo1.Lines.Add('Stop mining');
-  SaveConfig;
 end;
 
 
@@ -439,6 +436,7 @@ begin
     Memo1.Lines.Add('Cancel restart mining');
   end;
   StopDos();
+  Sleep(100);
   OnDosStart();
   if not FileExists(EditPathXmrigNvidia.Text) then
   begin
