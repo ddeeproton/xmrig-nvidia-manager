@@ -33,6 +33,7 @@ type
     SpeedButtonStop: TSpeedButton;
     SpeedButtonStop1: TSpeedButton;
     SpinEditTemperatureLimit: TSpinEdit;
+    TimerRunDos: TTimer;
     TimerStartDelayed: TTimer;
     TrayIcon1: TTrayIcon;
     procedure CheckGroupOptionsItemClick(Sender: TObject; Index: integer);
@@ -44,6 +45,7 @@ type
     procedure OnDosOutput(line:String);
     procedure OnDosStart();
     procedure OnDosStop();
+    procedure TimerRunDosTimer(Sender: TObject);
     procedure TrackDosTemperatureOutput(line:String);
     procedure TrackDonation(line:String);
     procedure OnDosTemperatureOutput(Temperature:Integer);
@@ -93,6 +95,7 @@ begin
   Form1.DoubleBuffered := True;
   ImageBackground.Align := alClient;
   TimerStartDelayed.Enabled := False;
+  TimerRunDos.Enabled := False;
   Memo1.Clear;
   Memo1.Lines.Add('Welcome!');
   Memo1.Lines.Add('Xmrig Manager is a GUI for xmrig.exe and xmrig-nvidia.exe');
@@ -334,6 +337,19 @@ begin
   Memo1.Lines.Add('Stop mining');
 end;
 
+procedure TForm1.TimerRunDosTimer(Sender: TObject);
+begin
+  TimerRunDos.Enabled := False;
+  OnDosStart();
+  if not FileExists(EditPathXmrigNvidia.Text) then
+  begin
+    Memo1.Lines.Add('Error: Path to xmrig-nvidia.exe is not valid!');
+    Memo1.Lines.Add('Download and configure xmrig-nvidia.exe here:');
+    Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+  end;
+  RunDos(EditPathXmrigNvidia.Text);
+end;
+
 
 procedure TForm1.OnDosOutput(line:String);
 begin
@@ -430,21 +446,11 @@ end;
 
 procedure TForm1.ButtonStartClick(Sender: TObject);
 begin
-  if TimerStartDelayed.Enabled then
-  begin
-    TimerStartDelayed.Enabled := False;
-    Memo1.Lines.Add('Cancel restart mining');
-  end;
-  StopDos();
-  Sleep(100);
-  OnDosStart();
-  if not FileExists(EditPathXmrigNvidia.Text) then
-  begin
-    Memo1.Lines.Add('Error: Path to xmrig-nvidia.exe is not valid!');
-    Memo1.Lines.Add('Download and configure xmrig-nvidia.exe here:');
-    Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
-  end;
-  RunDos(EditPathXmrigNvidia.Text);
+  ButtonStopClick(nil);
+  Application.ProcessMessages;
+  TimerRunDos.Enabled := False;
+  Application.ProcessMessages;
+  TimerRunDos.Enabled := True;
 end;
 
 procedure TForm1.ButtonStopClick(Sender: TObject);
@@ -454,6 +460,7 @@ begin
     TimerStartDelayed.Enabled := False;
     Memo1.Lines.Add('Cancel restart mining');
   end;
+  TimerRunDos.Enabled := False;
   StopDos();
 end;
 

@@ -4,7 +4,7 @@ object Form1: TForm1
   Top = 147
   Width = 491
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig Manager v1.0.12'
+  Caption = 'Xmrig Manager v1.0.13'
   ClientHeight = 224
   ClientWidth = 491
   Color = clBlack
@@ -2070,6 +2070,7 @@ object Form1: TForm1
   end
   object TimerStartDelayed: TTimer
     Enabled = False
+    OnTimer = TimerStartDelayedTimer
     left = 304
     top = 152
   end
@@ -2773,5 +2774,12 @@ object Form1: TForm1
       Caption = 'Exit'
       OnClick = MenuItemExitClick
     end
+  end
+  object TimerRunDos: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = TimerRunDosTimer
+    left = 338
+    top = 152
   end
 end
