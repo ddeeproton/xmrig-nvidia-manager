@@ -34,7 +34,7 @@ https://github.com/xmrig/xmrig-deps/releases
 
 #### 3. Open MSYS2 (MinGW) terminal:
 
-#### Update pacman, and install gcc, make, cmake, and pkg-config:
+#### Update "pacman". Install "gcc", "make", "cmake", and "pkg-config":
 
 #### Win 64 bit:
 pacman -Sy
