@@ -13,7 +13,9 @@ Allow donation 0%
   and then switch agaiin to developer's pool for 1 minute, these rounds will continue until miner working.
  
   If you plan on changing this setting to 0 please consider making a one off donation to "XMRIG" wallet:
+	
   XMR: 48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD
+
   BTC: 1P7ujsXeX7GxQwHNnJsRMgAdNkFZmNVqJT
 
 ### Download release:
