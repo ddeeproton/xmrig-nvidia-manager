@@ -24,7 +24,7 @@ The original source:
 
 https://github.com/xmrig/xmrig/archive/master.zip
 
-The modified source:
+Or the modified source (as you want):
 
 https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/SOURCE%20xmrig-master.zip
 
