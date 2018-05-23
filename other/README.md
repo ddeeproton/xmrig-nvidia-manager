@@ -80,4 +80,4 @@ cmake .. -G "Unix Makefiles" -DXMRIG_DEPS=c:/xmrig-deps/gcc/x64
 make
 
 
-![](preview3.png)
+![](preview3_1.png)
