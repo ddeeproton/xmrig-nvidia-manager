@@ -63,7 +63,7 @@ mkdir build
 
 cd build
 
-#### 5. Replace the path "c:/xmrig-deps/gcc/x64" by the path of directory unzipped in step 2.b.
+#### 5. Replace the path "c:/xmrig-deps/gcc/x64" by the directory path unzipped in step 2.b.
 cmake .. -G "Unix Makefiles" -DXMRIG_DEPS=c:/xmrig-deps/gcc/x64
 
 make
