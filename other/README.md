@@ -13,12 +13,24 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/SOURCE%20xmr
 ### How to buid (Windows)
 
 #### 1. Download and install MSYS2 (MinGW):
+
 http://www.msys2.org/
 
-####2. Download and uncompress:
-2.a. https://github.com/xmrig/xmrig/archive/master.zip
+#### 2. Download and uncompress:
 
-2.b. https://github.com/xmrig/xmrig-deps/releases
+#### 2.a. The source:
+
+The original source:
+
+https://github.com/xmrig/xmrig/archive/master.zip
+
+The modified source:
+
+https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/SOURCE%20xmrig-master.zip
+
+#### 2.b. The dependencies: 
+
+https://github.com/xmrig/xmrig-deps/releases
 
 ####3. Open MSYS2 (MinGW) terminal:
 
