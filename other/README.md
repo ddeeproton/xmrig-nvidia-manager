@@ -32,6 +32,11 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/SOURCE%20xmr
 
 https://github.com/xmrig/xmrig-deps/releases
 
+If the link is broken:
+
+https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/xmrig-deps-3.1.zip
+
+
 #### 3. Open MSYS2 (MinGW) terminal:
 
 #### Update "pacman". Install "gcc", "make", "cmake", and "pkg-config":
