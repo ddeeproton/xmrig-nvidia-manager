@@ -96,3 +96,7 @@ make
 
 
 ![](preview3_1.png)
+
+#### More build options here:
+
+https://github.com/xmrig/xmrig/wiki/Windows-Build
