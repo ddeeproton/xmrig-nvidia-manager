@@ -18,7 +18,7 @@ http://www.msys2.org/
 
 #### 2. Download and uncompress:
 
-#### 2.a. The source:
+#### 2.a. Download and uncompress the source:
 
 The original source:
 
@@ -28,11 +28,11 @@ Or the modified source (as you want):
 
 https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/SOURCE%20xmrig-master.zip
 
-#### 2.b. The dependencies: 
+#### 2.b. Download and uncompress the dependencies: 
 
 https://github.com/xmrig/xmrig-deps/releases
 
-####3. Open MSYS2 (MinGW) terminal:
+#### 3. Open MSYS2 (MinGW) terminal:
 
 #### Win 64 bit:
 pacman -Sy
@@ -56,14 +56,14 @@ pacman -S mingw-w64-i686-cmake
 
 pacman -S mingw-w64-i686-pkg-config
 
-#### Go to directory unzipped in step 2.a.
+#### 4. Go to directory unzipped in step 2.a.
 cd "xmrig-master"
 
 mkdir build
 
 cd build
 
-#### replace the path "c:/xmrig-deps/gcc/x64" by the path of directory unzopped in step 2.b.
+#### 5. Replace the path "c:/xmrig-deps/gcc/x64" by the path of directory unzopped in step 2.b.
 cmake .. -G "Unix Makefiles" -DXMRIG_DEPS=c:/xmrig-deps/gcc/x64
 
 make
