@@ -39,6 +39,8 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/raw/master/other/xmrig-deps-3
 
 #### 3. Open MSYS2 (MinGW) terminal:
 
+![](preview2.png)
+
 #### Update "pacman". Install "gcc", "make", "cmake", and "pkg-config":
 
 #### Win 64 bit:
@@ -78,4 +80,4 @@ cmake .. -G "Unix Makefiles" -DXMRIG_DEPS=c:/xmrig-deps/gcc/x64
 make
 
 
-![](preview2.png)
+![](preview3.png)
