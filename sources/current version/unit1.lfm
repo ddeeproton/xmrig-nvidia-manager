@@ -4,7 +4,7 @@ object Form1: TForm1
   Top = 147
   Width = 546
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig Manager v1.1.1'
+  Caption = 'Xmrig Manager v1.1.2'
   ClientHeight = 224
   ClientWidth = 546
   Color = clBlack
@@ -2046,7 +2046,7 @@ object Form1: TForm1
     Width = 137
     Color = clBlack
     Items.Strings = (
-      'No donation'
+      'Restart on error'
       'AutoStart Mining'
       'Start on OS Boot'
       'Start in Background '

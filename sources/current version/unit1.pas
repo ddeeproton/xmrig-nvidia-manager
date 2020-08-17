@@ -49,7 +49,7 @@ type
     procedure OnDosStop();
     procedure TimerRunDosTimer(Sender: TObject);
     procedure TrackDosTemperatureOutput(line:String);
-    procedure TrackDonation(line:String);
+    procedure TrackError(line:String);
     procedure OnDosTemperatureOutput(Temperature:Integer);
     procedure OnDosTemperatureExceed(Temperature:Integer);
     procedure OnDosTemperatureAllowed(Temperature:Integer);
@@ -76,7 +76,7 @@ var
   pid: Integer;
 
 const
-  I_NODONATION : Integer = 0;
+  I_RESTARTONERROR : Integer = 0;
   I_AUTOSTART: Integer = 1;
   I_BOOTWINDOWS: Integer = 2;
   I_BACKGROUNDSTART: Integer = 3;
@@ -105,16 +105,14 @@ begin
   Memo1.Lines.Add('Last release, source and documentation can be found here:');
   Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('Download and configure first xmrig or xmrig-nvidia.');
-  Memo1.Lines.Add('xmrig-nvidia:');
-  Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+  Memo1.Lines.Add('Download and configure first xmrig and set the XMRig local path into the GUI.');
   Memo1.Lines.Add('xmrig:');
   Memo1.Lines.Add('https://github.com/xmrig/xmrig/releases');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('To start mining with application:');
+  Memo1.Lines.Add('To start XMRig mining with the GUI application:');
   Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('To start in background:');
+  Memo1.Lines.Add('To start the GUI in background:');
   Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /background');
   Memo1.Lines.Add('');
   Memo1.Lines.Add('Commands can be combined:');
@@ -167,7 +165,7 @@ begin
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   EditPathXmrigNvidia.Text := Setup.ReadString('Application', 'PathXmrigNvidia', '');
   SpinEditTemperatureLimit.Value := Setup.ReadInteger('Application', 'TemperatureLimit', 84);
-  CheckListBoxOptions.Checked[I_NODONATION] := Setup.ReadBool('Application', 'NoDonation', False);
+  CheckListBoxOptions.Checked[I_RESTARTONERROR] := Setup.ReadBool('Application', 'NoDonation', False);
   CheckListBoxOptions.Checked[I_AUTOSTART] := Setup.ReadBool('Application', 'AutoStart', False);
   //CheckGroupOptions.Checked[I_BOOTWINDOWS] := Setup.ReadBool('Application', 'BootWindows', False);
   CheckListBoxOptions.Checked[I_BACKGROUNDSTART] := Setup.ReadBool('Application', 'BackgroundStart', False);
@@ -199,7 +197,7 @@ begin
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   Setup.WriteString('Application', 'PathXmrigNvidia', EditPathXmrigNvidia.Text);
   Setup.WriteInteger('Application', 'TemperatureLimit', SpinEditTemperatureLimit.Value);
-  Setup.WriteBool('Application', 'NoDonation', CheckListBoxOptions.Checked[I_NODONATION]);
+  Setup.WriteBool('Application', 'NoDonation', CheckListBoxOptions.Checked[I_RESTARTONERROR]);
   Setup.WriteBool('Application', 'AutoStart', CheckListBoxOptions.Checked[I_AUTOSTART]);
   //Setup.WriteBool('Application', 'BootWindows', CheckListBoxOptions.Checked[I_BOOTWINDOWS]);
   Setup.WriteBool('Application', 'BackgroundStart', CheckListBoxOptions.Checked[I_BACKGROUNDSTART]);
@@ -357,7 +355,7 @@ procedure TForm1.OnDosOutput(line:String);
 begin
   Memo1.Lines.Add(RemoveNewlineAtEnd(line));
   TrackDosTemperatureOutput(line);
-  TrackDonation(line);
+  TrackError(line);
 end;
 
 function TForm1.RemoveNewlineAtEnd(line: String): String;
@@ -399,12 +397,14 @@ begin
 end;
 
 
-procedure TForm1.TrackDonation(line:String);
+procedure TForm1.TrackError(line:String);
 begin
-  if not CheckListBoxOptions.Checked[I_NODONATION] then Exit;
-  if Pos('dev donate started', line) = 0 then Exit;
-  Memo1.Lines.Add('Stop donation (restart)');
-  ButtonStartClick(nil);
+  if not CheckListBoxOptions.Checked[I_RESTARTONERROR] then Exit;
+  if Pos('error', line) = 0 then Exit;
+  Memo1.Lines.Add('Error detected (restart in '+IntToStr(SpinEditSleep.Value)+' min)');
+  StopDos();
+  TimerStartDelayed.Interval := SpinEditSleep.Value * 60 * 1000;
+  TimerStartDelayed.Enabled := True;
 end;
 
 procedure TForm1.OnDosTemperatureOutput(Temperature:Integer);
