@@ -22,6 +22,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     Memo1: TMemo;
     MenuItemShow: TMenuItem;
     MenuItemHide: TMenuItem;
@@ -33,6 +34,7 @@ type
     SpeedButtonStop: TSpeedButton;
     SpeedButtonStop1: TSpeedButton;
     SpinEditTemperatureLimit: TSpinEdit;
+    SpinEditSleep: TSpinEdit;
     TimerRunDos: TTimer;
     TimerStartDelayed: TTimer;
     TrayIcon1: TTrayIcon;
@@ -343,9 +345,9 @@ begin
   OnDosStart();
   if not FileExists(EditPathXmrigNvidia.Text) then
   begin
-    Memo1.Lines.Add('Error: Path to xmrig-nvidia.exe is not valid!');
-    Memo1.Lines.Add('Download and configure xmrig-nvidia.exe here:');
-    Memo1.Lines.Add('https://github.com/xmrig/xmrig-nvidia/releases');
+    Memo1.Lines.Add('Error: Path to xmrig.exe is not valid!');
+    Memo1.Lines.Add('Download and configure xmrig.exe here:');
+    Memo1.Lines.Add('https://github.com/xmrig/xmrig/release');
   end;
   RunDos(EditPathXmrigNvidia.Text);
 end;
@@ -381,16 +383,12 @@ var
   startPos: String;
   Temperature, p: Integer;
 begin
-  // [2000-01-01 00:00:00]  * GPU #0: 80C FAN 50%
-  p := Pos(' GPU ', line);
+  // Parse line Exemple:
+  // #0 01:00.0   0W 69C fan0:44%
+  p := Pos('C fan', line);
   if p = 0 then exit;
-  line := copy(line, p, Length(line) - p + 1);
 
-  p := Pos(':', line);
-  if p = 0 then exit;
-  startPos := copy(line, p, Length(line) - p + 1);
-
-  line := getCharsBetween(line, ': ', 'C FAN');
+  line := getCharsBetween(line, 'W ', 'C fan');
   if line = '' then Exit;
 
   Temperature := -100;
@@ -420,9 +418,9 @@ end;
 
 procedure TForm1.OnDosTemperatureExceed(Temperature:Integer);
 begin
-  Memo1.Lines.Add('Temperature limit exceeded! Stop mining for 2 minutes.');
+  Memo1.Lines.Add('Temperature limit exceeded! Stop mining for '+IntToStr(SpinEditSleep.Value)+' min.');
   StopDos();
-  TimerStartDelayed.Interval := 2 * 60 * 1000;
+  TimerStartDelayed.Interval := SpinEditSleep.Value * 60 * 1000;
   TimerStartDelayed.Enabled := True;
 end;
 

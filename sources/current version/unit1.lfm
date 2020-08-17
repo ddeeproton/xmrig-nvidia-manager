@@ -2,14 +2,14 @@ object Form1: TForm1
   Left = 237
   Height = 224
   Top = 147
-  Width = 491
+  Width = 546
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig Manager v1.0.13'
+  Caption = 'Xmrig Manager v1.1.1'
   ClientHeight = 224
-  ClientWidth = 491
+  ClientWidth = 546
   Color = clBlack
   Constraints.MinHeight = 150
-  Constraints.MinWidth = 491
+  Constraints.MinWidth = 540
   Font.Color = clWhite
   Icon.Data = {
     F95300000000010004000000000001002000FB18000046000000303000000100
@@ -687,7 +687,7 @@ object Form1: TForm1
   }
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '2.0.6.0'
   object ImageBackground: TImage
     Left = 8
     Height = 29
@@ -1251,14 +1251,14 @@ object Form1: TForm1
     Left = 200
     Height = 23
     Top = 24
-    Width = 168
+    Width = 223
     Anchors = [akTop, akLeft, akRight]
     Color = clBlack
     TabOrder = 0
     Text = 'EditPathXmrigNvidia'
   end
   object SpeedButtonOpenDialog: TSpeedButton
-    Left = 373
+    Left = 428
     Height = 21
     Top = 24
     Width = 37
@@ -1295,7 +1295,7 @@ object Form1: TForm1
     Left = 201
     Height = 15
     Top = 47
-    Width = 77
+    Width = 76
     Caption = 'Temperature:'
     Font.Color = clWhite
     Font.Style = [fsBold]
@@ -1326,7 +1326,7 @@ object Form1: TForm1
     TabOrder = 2
   end
   object SpeedButtonStart: TSpeedButton
-    Left = 359
+    Left = 414
     Height = 21
     Top = 63
     Width = 53
@@ -1336,7 +1336,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object SpeedButtonStop: TSpeedButton
-    Left = 423
+    Left = 478
     Height = 21
     Top = 63
     Width = 53
@@ -2030,7 +2030,7 @@ object Form1: TForm1
     Left = 1
     Height = 130
     Top = 96
-    Width = 490
+    Width = 545
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clBlack
     Lines.Strings = (
@@ -2059,7 +2059,7 @@ object Form1: TForm1
     }
   end
   object SpeedButtonStop1: TSpeedButton
-    Left = 423
+    Left = 478
     Height = 21
     Top = 24
     Width = 53
@@ -2067,6 +2067,31 @@ object Form1: TForm1
     Caption = 'Hide'
     OnClick = MenuItemHideClick
     ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 357
+    Height = 15
+    Top = 47
+    Width = 34
+    Caption = 'Sleep:'
+    Font.Color = clWhite
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object SpinEditSleep: TSpinEdit
+    Left = 357
+    Height = 23
+    Hint = 'Time to sleep on temperature max reached (minutes)'
+    Top = 63
+    Width = 50
+    Color = clBlack
+    MinValue = 1
+    OnChange = SpinEditTemperatureLimitChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+    Value = 1
   end
   object TimerStartDelayed: TTimer
     Enabled = False
