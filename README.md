@@ -15,7 +15,7 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 "Xmrig Manager" helps to avoid temperature exceeding on graphic card when using xmrig application. 
 
-![](preview.png)
+![](preview_v1.1.1+.png)
 
 If the temperature exceeds limit, then mining is stopped for 2 minutes. 
 
