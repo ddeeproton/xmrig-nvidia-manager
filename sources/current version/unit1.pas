@@ -112,8 +112,8 @@ begin
   Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
   Memo1.Lines.Add('');
   Memo1.Lines.Add('3. Optional commands:');
-  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart');
-  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /background');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + ' /autostart');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + ' /background');
   Memo1.Lines.Add('');
 
   EditPathXmrigNvidia.Clear;
