@@ -1,12 +1,12 @@
 object Form1: TForm1
   Left = 237
-  Height = 224
+  Height = 253
   Top = 147
-  Width = 546
+  Width = 540
   Anchors = [akTop, akRight]
-  Caption = 'Xmrig Manager v1.1.2'
-  ClientHeight = 224
-  ClientWidth = 546
+  Caption = 'Xmrig Manager v1.1.3'
+  ClientHeight = 253
+  ClientWidth = 540
   Color = clBlack
   Constraints.MinHeight = 150
   Constraints.MinWidth = 540
@@ -1248,42 +1248,42 @@ object Form1: TForm1
     Stretch = True
   end
   object EditPathXmrigNvidia: TEdit
-    Left = 200
+    Left = 56
     Height = 23
     Top = 24
-    Width = 223
+    Width = 222
     Anchors = [akTop, akLeft, akRight]
     Color = clBlack
     TabOrder = 0
     Text = 'EditPathXmrigNvidia'
   end
   object SpeedButtonOpenDialog: TSpeedButton
-    Left = 428
-    Height = 21
-    Top = 24
-    Width = 37
+    Left = 282
+    Height = 25
+    Top = 23
+    Width = 39
     Anchors = [akTop, akRight]
     Caption = '...'
     OnClick = ButtonOpenDialogClick
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 200
+    Left = 56
     Height = 15
     Top = 8
-    Width = 216
-    Caption = 'Path to xmrig-nvidia.exe or  xmrig.exe'
+    Width = 100
+    Caption = 'Path to xmrig.exe'
     Font.Color = clWhite
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
   end
   object EditTemperature: TEdit
-    Left = 200
+    Left = 56
     Height = 23
     Hint = 'Current GPU Temperature (in °C)'
     Top = 63
-    Width = 81
+    Width = 84
     Color = clBlack
     ParentShowHint = False
     ReadOnly = True
@@ -1292,7 +1292,7 @@ object Form1: TForm1
     Text = 'EditTemperature'
   end
   object Label2: TLabel
-    Left = 201
+    Left = 57
     Height = 15
     Top = 47
     Width = 76
@@ -1303,7 +1303,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 296
+    Left = 149
     Height = 15
     Top = 47
     Width = 31
@@ -1314,7 +1314,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object SpinEditTemperatureLimit: TSpinEdit
-    Left = 296
+    Left = 149
     Height = 23
     Hint = 'Maximum GPU Temperature (in °C)'
     Top = 63
@@ -1326,9 +1326,9 @@ object Form1: TForm1
     TabOrder = 2
   end
   object SpeedButtonStart: TSpeedButton
-    Left = 414
-    Height = 21
-    Top = 63
+    Left = 268
+    Height = 26
+    Top = 62
     Width = 53
     Anchors = [akTop, akRight]
     Caption = 'Start'
@@ -1336,10 +1336,10 @@ object Form1: TForm1
     ParentFont = False
   end
   object SpeedButtonStop: TSpeedButton
-    Left = 478
-    Height = 21
-    Top = 63
-    Width = 53
+    Left = 323
+    Height = 26
+    Top = 62
+    Width = 54
     Anchors = [akTop, akRight]
     Caption = 'Stop'
     OnClick = ButtonStopClick
@@ -2028,9 +2028,9 @@ object Form1: TForm1
   end
   object Memo1: TMemo
     Left = 1
-    Height = 130
+    Height = 157
     Top = 96
-    Width = 545
+    Width = 539
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clBlack
     Lines.Strings = (
@@ -2040,10 +2040,11 @@ object Form1: TForm1
     TabOrder = 3
   end
   object CheckListBoxOptions: TCheckListBox
-    Left = 48
-    Height = 79
-    Top = 8
-    Width = 137
+    Left = 380
+    Height = 74
+    Top = 13
+    Width = 157
+    Anchors = [akTop, akRight]
     Color = clBlack
     Items.Strings = (
       'Restart on error'
@@ -2059,17 +2060,17 @@ object Form1: TForm1
     }
   end
   object SpeedButtonStop1: TSpeedButton
-    Left = 478
-    Height = 21
-    Top = 24
-    Width = 53
+    Left = 323
+    Height = 25
+    Top = 23
+    Width = 54
     Anchors = [akTop, akRight]
     Caption = 'Hide'
     OnClick = MenuItemHideClick
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 357
+    Left = 210
     Height = 15
     Top = 47
     Width = 34
@@ -2080,7 +2081,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object SpinEditSleep: TSpinEdit
-    Left = 357
+    Left = 210
     Height = 23
     Hint = 'Time to sleep on temperature max reached (minutes)'
     Top = 63
@@ -2805,6 +2806,12 @@ object Form1: TForm1
     Interval = 100
     OnTimer = TimerRunDosTimer
     left = 338
+    top = 152
+  end
+  object TimerDisplayCount: TTimer
+    Enabled = False
+    OnTimer = TimerDisplayCountTimer
+    left = 372
     top = 152
   end
 end

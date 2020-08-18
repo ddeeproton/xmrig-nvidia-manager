@@ -35,6 +35,7 @@ type
     SpeedButtonStop1: TSpeedButton;
     SpinEditTemperatureLimit: TSpinEdit;
     SpinEditSleep: TSpinEdit;
+    TimerDisplayCount: TTimer;
     TimerRunDos: TTimer;
     TimerStartDelayed: TTimer;
     TrayIcon1: TTrayIcon;
@@ -47,6 +48,8 @@ type
     procedure OnDosOutput(line:String);
     procedure OnDosStart();
     procedure OnDosStop();
+    procedure StartCount(maxSeconds: Integer);
+    procedure TimerDisplayCountTimer(Sender: TObject);
     procedure TimerRunDosTimer(Sender: TObject);
     procedure TrackDosTemperatureOutput(line:String);
     procedure TrackError(line:String);
@@ -95,28 +98,23 @@ procedure TForm1.FormCreate(Sender: TObject);
 var i: Integer;
 begin
   Form1.DoubleBuffered := True;
+  Memo1.DoubleBuffered := True;
   ImageBackground.Align := alClient;
   TimerStartDelayed.Enabled := False;
   TimerRunDos.Enabled := False;
+  TimerDisplayCount.Enabled := False;
   Memo1.Clear;
   Memo1.Lines.Add('Welcome!');
-  Memo1.Lines.Add('Xmrig Manager is a GUI for xmrig.exe and xmrig-nvidia.exe');
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('Last release, source and documentation can be found here:');
-  Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
-  Memo1.Lines.Add('');
-  Memo1.Lines.Add('Download and configure first xmrig and set the XMRig local path into the GUI.');
-  Memo1.Lines.Add('xmrig:');
+  Memo1.Lines.Add('1. Download and configure XMRig');
   Memo1.Lines.Add('https://github.com/xmrig/xmrig/releases');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('To start XMRig mining with the GUI application:');
-  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart');
+  Memo1.Lines.Add('2. Set the XMRig path into the Manager:');
+  Memo1.Lines.Add('https://github.com/ddeeproton/xmrig-nvidia-manager');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('To start the GUI in background:');
+  Memo1.Lines.Add('3. Optional commands:');
+  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart');
   Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /background');
   Memo1.Lines.Add('');
-  Memo1.Lines.Add('Commands can be combined:');
-  Memo1.Lines.Add(ExtractFileName(Application.ExeName) + '.exe /autostart /background');
 
   EditPathXmrigNvidia.Clear;
   EditTemperature.Text := '?';
@@ -127,8 +125,6 @@ begin
 
   if CheckListBoxOptions.Checked[I_BACKGROUNDSTART] then
     MenuItemHideClick(nil);
-
-  //TrackDosTemperatureOutput('[2000-01-01 00:00:00]  * GPU #0: 85C FAN 50%');
 
   for i := 1 to ParamCount() do
   begin
@@ -151,6 +147,7 @@ procedure TForm1.LoadConfig();
 var
   Setup: TIniFile;
   Reg: TRegistry;
+  ShouldSave: Boolean;
 begin
   // Check load on boot
   Reg := TRegistry.Create;
@@ -163,15 +160,25 @@ begin
   Reg.Free;
 
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
+
+  ShouldSave := not Setup.ValueExists('Application', 'PathXmrigNvidia')
+             or not Setup.ValueExists('Application', 'TemperatureLimit')
+             or not Setup.ValueExists('Application', 'SleepOnError')
+             or not Setup.ValueExists('Application', 'RestartOnError')
+             or not Setup.ValueExists('Application', 'AutoStart')
+             or not Setup.ValueExists('Application', 'BootWindows')
+             or not Setup.ValueExists('Application', 'BackgroundStart');
+
   EditPathXmrigNvidia.Text := Setup.ReadString('Application', 'PathXmrigNvidia', '');
   SpinEditTemperatureLimit.Value := Setup.ReadInteger('Application', 'TemperatureLimit', 84);
-  CheckListBoxOptions.Checked[I_RESTARTONERROR] := Setup.ReadBool('Application', 'NoDonation', False);
+  SpinEditSleep.Value := Setup.ReadInteger('Application', 'SleepOnError', 1);
+  CheckListBoxOptions.Checked[I_RESTARTONERROR] := Setup.ReadBool('Application', 'RestartOnError', True);
   CheckListBoxOptions.Checked[I_AUTOSTART] := Setup.ReadBool('Application', 'AutoStart', False);
   //CheckGroupOptions.Checked[I_BOOTWINDOWS] := Setup.ReadBool('Application', 'BootWindows', False);
   CheckListBoxOptions.Checked[I_BACKGROUNDSTART] := Setup.ReadBool('Application', 'BackgroundStart', False);
   Setup.Free;
 
-
+  if ShouldSave then SaveConfig();
 end;
 
 procedure TForm1.SaveConfig();
@@ -197,7 +204,8 @@ begin
   Setup := TIniFile.Create(ExtractFileDir(Application.ExeName) + '\Setup.ini');
   Setup.WriteString('Application', 'PathXmrigNvidia', EditPathXmrigNvidia.Text);
   Setup.WriteInteger('Application', 'TemperatureLimit', SpinEditTemperatureLimit.Value);
-  Setup.WriteBool('Application', 'NoDonation', CheckListBoxOptions.Checked[I_RESTARTONERROR]);
+  Setup.WriteInteger('Application', 'SleepOnError', SpinEditSleep.Value);
+  Setup.WriteBool('Application', 'RestartOnError', CheckListBoxOptions.Checked[I_RESTARTONERROR]);
   Setup.WriteBool('Application', 'AutoStart', CheckListBoxOptions.Checked[I_AUTOSTART]);
   //Setup.WriteBool('Application', 'BootWindows', CheckListBoxOptions.Checked[I_BOOTWINDOWS]);
   Setup.WriteBool('Application', 'BackgroundStart', CheckListBoxOptions.Checked[I_BACKGROUNDSTART]);
@@ -340,6 +348,7 @@ end;
 procedure TForm1.TimerRunDosTimer(Sender: TObject);
 begin
   TimerRunDos.Enabled := False;
+  TimerDisplayCount.Enabled := False;
   OnDosStart();
   if not FileExists(EditPathXmrigNvidia.Text) then
   begin
@@ -403,7 +412,8 @@ begin
   if Pos('error', line) = 0 then Exit;
   Memo1.Lines.Add('Error detected (restart in '+IntToStr(SpinEditSleep.Value)+' min)');
   StopDos();
-  TimerStartDelayed.Interval := SpinEditSleep.Value * 60 * 1000;
+  TimerStartDelayed.Interval := SpinEditSleep.Value * 60 * 1000;   
+  StartCount(SpinEditSleep.Value * 60);
   TimerStartDelayed.Enabled := True;
 end;
 
@@ -421,6 +431,7 @@ begin
   Memo1.Lines.Add('Temperature limit exceeded! Stop mining for '+IntToStr(SpinEditSleep.Value)+' min.');
   StopDos();
   TimerStartDelayed.Interval := SpinEditSleep.Value * 60 * 1000;
+  StartCount(SpinEditSleep.Value * 60);
   TimerStartDelayed.Enabled := True;
 end;
 
@@ -447,6 +458,7 @@ begin
   ButtonStopClick(nil);
   Application.ProcessMessages;
   TimerRunDos.Enabled := False;
+  TimerDisplayCount.Enabled := False;
   Application.ProcessMessages;
   TimerRunDos.Enabled := True;
 end;
@@ -458,6 +470,7 @@ begin
     TimerStartDelayed.Enabled := False;
     Memo1.Lines.Add('Cancel restart mining');
   end;
+  TimerDisplayCount.Enabled := False;
   TimerRunDos.Enabled := False;
   StopDos();
 end;
@@ -480,5 +493,34 @@ begin
   SaveConfig;
 end;
 
+//=========================
+//      Display counter
+//=========================
+
+var DisplayMaxSeconds: Integer;
+
+procedure TForm1.TimerDisplayCountTimer(Sender: TObject);
+begin
+  if DisplayMaxSeconds <= 0 then
+  begin
+    Memo1.Lines.Delete(Memo1.Lines.Count - 1);
+    TimerDisplayCount.Enabled:=False;
+    Exit;
+  end;
+  Memo1.Lines.Strings[Memo1.Lines.Count - 1] := 'Wait '+IntToStr(DisplayMaxSeconds)+'s';
+  Dec(DisplayMaxSeconds);
+
+end;
+
+procedure TForm1.StartCount(maxSeconds: Integer);
+begin
+  DisplayMaxSeconds := maxSeconds - 2;
+  TimerDisplayCount.Interval := 1000;
+  TimerDisplayCount.Enabled := True;
+end;
+
+//=========================
+//   ********************
+//=========================
 end.
 

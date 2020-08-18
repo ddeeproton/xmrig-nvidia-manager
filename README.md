@@ -15,7 +15,7 @@ https://github.com/ddeeproton/xmrig-nvidia-manager/tree/master/sources
 
 "Xmrig Manager" helps to avoid temperature exceeding on graphic card when using xmrig application. 
 
-![](preview_v1.1.2.png)
+![](preview_v1.1.3.png)
 
 If the temperature exceeds limit, then mining is stopped for 2 minutes. 
 
@@ -55,6 +55,13 @@ A free account must be created on developpez.com (French website)
 https://delphi.developpez.com/telecharger-gratuit/delphi7-perso/
 
 # Changes
+
+### v1.1.3
+	Display time before autorestart
+	
+	Fix the Setup.ini config
+	
+	Change design and text description on start
 
 ### v1.1.2
 	Add option Restart on error
